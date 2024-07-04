@@ -12,8 +12,8 @@ h1, p {
 }
 
 .gjs-custom-editor {
-  background-color: white; /* 白色背景 */
-  color: black; /* 黑色文字 */
+  background-color: black; /* 黑色背景 */
+  color: white; /* 白色文字 */
 }
 
 .gjs-custom-editor-canvas {
@@ -26,8 +26,14 @@ h1, p {
 
 /* 导航栏设置为更深的灰色 */
 .bg-dark-gray {
-  background-color: #404040; /* 更深的灰色背景 */
+  background-color: white; /* 更深的灰色背景 */
 }
+
+.left-sidebar {
+  background-color: white; /* 设置背景为白色 */
+  color: black; /* 设置文字颜色为黑色 */
+}
+
 
 /* 顶部导航栏设置 */
 .topbar {
@@ -68,7 +74,7 @@ h1, p {
 
 /* 预览模式下的编辑器背景 */
 .gjs-preview .gjs-editor {
-  background-color: white !important; /* 设置背景色为白色 */
+  background-color: white  !important; /* 设置背景色为白色 */
 }
 
 /* style.css */
@@ -80,4 +86,49 @@ body.preview-mode {
 .preview-mode .gjs-pn-views-container,
 .preview-mode .gjs-top {
   display: none !important;
+}
+
+/* 调整工具栏的整体样式 */
+.gjs-toolbar {
+  font-size: 32px !important; /* 设置工具栏的字体大小 */
+  padding: 10px !important; /* 设置工具栏内边距 */
+  background-color: #fff !important; /* 设置背景颜色，使用 !important 来覆盖其他样式 */
+  border-radius: 5px !important; /* 设置圆角 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important; /* 设置阴影效果 */
+}
+
+.gjs-toolbar .hidden {
+  display: none; /* 隐藏工具栏的样式 */
+}
+
+/* 调整工具栏按钮的样式 */
+.gjs-toolbar .gjs-toolbar-item {
+  margin: 0 5px; /* 设置按钮之间的间距 */
+  padding: 5px 10px; /* 设置按钮内边距 */
+  font-size: 32px; /* 设置按钮的字体大小，使图标更大 */
+  background-color: #eee; /* 设置按钮背景颜色 */
+  border-radius: 3px; /* 设置按钮的圆角 */
+  transition: background-color 0.3s; /* 设置按钮背景色的过渡效果 */
+  width: 48px;
+}
+
+/* 调整工具栏中 SVG 图标的大小 */
+.gjs-toolbar .gjs-toolbar-item svg {
+  width: 32px;  /* 设置图标的宽度 */
+  height: 32px; /* 设置图标的高度 */
+  vertical-align: middle; /* 确保图标垂直居中对齐 */
+  background-color: black; /* 设置图标背景色为黑色 */
+  border-radius: 3px; /* 为图标增加圆角，以适应整体样式 */
+  padding: 4px; /* 增加内边距，让图标有足够的空间 */
+  fill: white; /* 确保图标内容的颜色为白色，以在黑色背景上清晰显示 */
+}
+
+/* 设置按钮悬停效果 */
+.gjs-toolbar .gjs-toolbar-item:hover {
+  background-color: #ccc; /* 鼠标悬停时的背景颜色 */
+}
+
+/* 如果有特定的图标类名，可以进一步自定义图标样式 */
+.gjs-toolbar .gjs-toolbar-item .fa {
+  font-size: 32px; /* 如果图标是 FontAwesome 字体，则调整其大小 */
 }

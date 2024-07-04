@@ -1,0 +1,67 @@
+/* CustomTraitManager.css */
+
+.gjs-custom-style-manager {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .setting-item {
+    margin-bottom: 10px;
+  }
+  
+  .flex {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .space-x-2 {
+    gap: 10px; /* 设置按钮之间的间距 */
+  }
+  
+  .mt-2 {
+    margin-top: 20px;
+  }
+  
+  .align-items-center {
+    align-items: center; /* 水平居中对齐 */
+  }
+  
+  .icon-button {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .icon-button.left-align {
+    color: #555;
+  }
+  
+  .icon-button.center-align {
+    color: #555;
+  }
+  
+  .icon-button.right-align {
+    color: #555;
+  }
+  
+  .icon-button.justify {
+    color: #555;
+  }
+  
+  .icon-button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* 使 SettingItem 占据一整行并调整高度 */
+.setting-item-full {
+    width: 100%; /* 使其占据一整行 */
+    margin-top: 10px; /* 调整顶部间距 */
+    margin-bottom: 10px; /* 调整底部间距 */
+  }
+  

@@ -1,0 +1,52 @@
+.gjs-right-sidebar {
+    border-right: 1px solid #e0e0e0;
+  }
+  
+  .gjs-right-sidebar .flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+
+  .gjs-right-sidebar .flex-grow {
+    flex-grow: 1;
+  }
+  
+  .gjs-right-sidebar .overflow-y-auto {
+    overflow-y: auto;
+  }
+  
+  .gjs-right-sidebar .border-t {
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  .gjs-right-sidebar .mt-2 {
+    margin-top: 0.5rem;
+  }
+  
+  .gjs-right-sidebar .space-x-1 > * + * {
+    margin-left: 0.25rem;
+  }
+
+  .setting-item {
+    flex-grow: 1;
+  }
+
+  .setting-item-full {
+    width: 100%; /* 占据一整行 */
+    margin-top: 10px; /* 可根据需要调整间距 */
+  }
+  
+  /* 调整下拉框高度 */
+  .setting-item-full .MuiFormControl-root {
+    height: 40px; /* 调整高度, 可以根据需要微调 */
+  }
+  
+  /* 确保 FormControl 内部的 Select 也适应高度 */
+  .setting-item-full .MuiInputBase-root {
+    height: 100%; /* 使其与父级高度一致 */
+    display: flex;
+    align-items: center; /* 垂直居中内容 */
+  }
+  
