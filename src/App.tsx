@@ -12,11 +12,7 @@ import Topbar from './components/Topbar';
 import RightSidebar from './components/RightSidebar';
 import './style.css';
 import { useEffect } from 'react';
-import BoldIcon from '@material-ui/icons/FormatBold';
-import ItalicIcon from '@material-ui/icons/FormatItalic';
-import UnderlineIcon from '@material-ui/icons/FormatUnderlined';
-import StrikethroughIcon from '@material-ui/icons/StrikethroughS';
-import LinkIcon from '@material-ui/icons/Link';
+
 
 
 const theme = createTheme({
@@ -166,6 +162,10 @@ export default function App() {
     editor.on('component:selected', (model) => {
       // 获取当前组件的工具栏
       let toolbar = [];
+      console.log('Selected component:', model.get('tagName'));
+      if(model.get('tagName')== 'body'){
+        return;
+      }
       toolbar.push({
         attributes: { class: 'toolbar-button' },
         command: 'bold',
@@ -207,9 +207,14 @@ export default function App() {
       document.querySelector('.gjs-toolbar').classList.remove('hidden');
     });
 
-    editor.on('component:deselected', (model) => {
+    editor.on('component:deselected', () => {
       // 清空工具栏
-      model.set('toolbar', []);
+      const selectedModel = editor.getSelected();
+      if (selectedModel) {
+        selectedModel.set('toolbar', []);
+      }
+    
+      // 隐藏工具栏
       document.querySelector('.gjs-toolbar').classList.add('hidden');
     });
   };

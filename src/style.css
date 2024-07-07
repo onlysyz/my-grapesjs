@@ -97,7 +97,7 @@ body.preview-mode {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important; /* 设置阴影效果 */
 }
 
-.gjs-toolbar .hidden {
+.gjs-toolbar.hidden {
   display: none; /* 隐藏工具栏的样式 */
 }
 
