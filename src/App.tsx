@@ -155,8 +155,21 @@ export default function App() {
       <path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4 4 0 0 1-.82 1H12a3 3 0 1 0 0-6z"/>
     </svg>
     `
+    const updateComponentStyle = (property, value) => {
+      const component = editor.getSelected();
+      if (component) {
+        const currentStyle = component.getStyle()[property];
+        if (currentStyle === value) {
+          component.addStyle({ [property]: '' }); // Remove the style
+        } else {
+          component.addStyle({ [property]: value }); // Apply the style
+        }
+      }
+    };
     
-    
+    const handleToolbarClick = (property, value) => () => {
+      updateComponentStyle(property, value);
+    };
     // 添加其他图标...
     
     editor.on('component:selected', (model) => {
@@ -168,35 +181,35 @@ export default function App() {
       }
       toolbar.push({
         attributes: { class: 'toolbar-button' },
-        command: 'bold',
+        command: handleToolbarClick('font-weight', 'bold'), // Bold button
         label: boldIconString,
         id: 'boldIcon'
       });
 
       toolbar.push({
         attributes: { class: 'toolbar-button' },
-        command: 'italic',
+        command: handleToolbarClick('font-style', 'italic'), // Italic button
         label: italicIconString,
         id: 'italicIcon'
       });
 
       toolbar.push({
         attributes: { class: 'toolbar-button' },
-        command: 'underline',
+        command: handleToolbarClick('text-decoration', 'underline'), // Underline button
         label: underlineIconString,
         id: 'underlineIcon'
       });
 
       toolbar.push({
         attributes: { class: 'toolbar-button' },
-        command: 'strikethrough',
+        command: handleToolbarClick('text-decoration', 'line-through'), // Strikethrough button
         label: strikethroughIconString,
         id: 'strikethroughIcon'
       });
 
       toolbar.push({
         attributes: { class: 'toolbar-button' },
-        command: 'link',
+        command: 'custom-link',
         label: linkIconString,
         id: 'linkIcon'
       });

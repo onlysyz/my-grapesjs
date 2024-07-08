@@ -8,6 +8,7 @@ import {
   mdiXml,
   mdiEye,
   mdiEyeOff,
+  mdiCloudUpload
 } from '@mdi/js';
 import Icon from '@mdi/react';
 import { useEffect, useState } from 'react';
@@ -115,6 +116,10 @@ export default function TopbarButtons({
       id: 'core:redo',
       iconPath: mdiArrowURightTop,
       disabled: () => !UndoManager.hasRedo(),
+    },
+    {
+      id: 'deploy-page',
+      iconPath: mdiCloudUpload, // You can choose any suitable icon
     },
   ];
 
