@@ -14,17 +14,20 @@ import Icon from '@mdi/react';
 import { useEffect, useState } from 'react';
 import { BTN_CLS, MAIN_BORDER_COLOR, cx } from './common';
 import './TopbarButtons.css';
+import { useModal } from './ModalContext';
 
 interface CommandButton {
   id: string;
   iconPath: string;
   options?: Record<string, any>;
   disabled?: () => boolean;
+  onClick?: () => void;
 }
 
 export default function TopbarButtons({
   className,
-}: React.HTMLAttributes<HTMLDivElement>) {
+  onDeployClick,
+}: React.HTMLAttributes<HTMLDivElement> & { onDeployClick: () => void }) {
   const editor = useEditor();
   const [, setUpdateCounter] = useState(0);
   const { UndoManager, Commands } = editor;
@@ -120,6 +123,7 @@ export default function TopbarButtons({
     {
       id: 'deploy-page',
       iconPath: mdiCloudUpload, // You can choose any suitable icon
+      onClick: onDeployClick,
     },
   ];
 
@@ -158,11 +162,16 @@ export default function TopbarButtons({
             Commands.isActive(id) && 'text-sky-300',
             disabled?.() && 'opacity-50'
           )}
-          onClick={() =>
-            Commands.isActive(id)
-              ? Commands.stop(id)
-              : Commands.run(id, options)
-          }
+          onClick={() => {
+            const btn = cmdButtons.find((btn) => btn.id === id);
+            if (btn?.onClick) {
+              btn.onClick();
+            } else {
+              Commands.isActive(id)
+                ? Commands.stop(id)
+                : Commands.run(id, options);
+            }
+          }}
           disabled={disabled?.()}
         >
           <Icon path={iconPath} size={1} />

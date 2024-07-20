@@ -92,6 +92,9 @@ export default function App() {
   const [isDragging, setIsDragging] = React.useState(false);
   const [startPosition, setStartPosition] = React.useState({ x: 0, y: 0 });
   const editorRef = React.useRef<Editor | null>(null);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  
 
   React.useEffect(() => {
     initializeGjsOptions().then(setGjsOptions);
@@ -165,6 +168,70 @@ export default function App() {
           component.addStyle({ [property]: value }); // Apply the style
         }
       }
+    };
+
+    
+
+    const handleDeploy = ({ repoOwner, repoName, branch, token }) => {
+      const htmlContent = editor.getHtml();
+      const cssContent = editor.getCss();
+      const pageContent = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <style>${cssContent}</style>
+          <title>Deployed Page</title>
+        </head>
+        <body>
+          ${htmlContent}
+        </body>
+        </html>
+      `;
+  
+      const filePath = 'index.html';
+      const message = 'Deploy from GrapesJS';
+      const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
+  
+      fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+          'Authorization': `token ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(response => response.json())
+      .then(data => {
+        const sha = data.sha;
+  
+        return fetch(apiUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: message,
+            content: btoa(pageContent),
+            branch: branch,
+            sha: sha
+          }),
+        });
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.content) {
+          alert('Page deployed successfully!');
+          console.log('Page URL:', `https://${repoOwner}.github.io/${repoName}/`);
+        } else {
+          alert('Deployment failed!');
+        }
+      })
+      .catch(error => {
+        console.error('Error during deployment:', error);
+        alert('Deployment error!');
+      });
     };
     
     const handleToolbarClick = (property, value) => () => {
